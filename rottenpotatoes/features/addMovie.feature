@@ -1,8 +1,4 @@
-Feature: display list of movies sorted by different criteria
- 
-  As an avid moviegoer
-  So that I can quickly browse movies based on my preferences
-  I want to see movies sorted by title or release date
+Feature: User can manually add movie
 
 Background: movies have been added to database
   
@@ -21,14 +17,12 @@ Background: movies have been added to database
 
   And I am on the RottenPotatoes home page
 
-Scenario: sort movies alphabetically
-  When I follow "Movie Title"
-  # your steps here
-  Then I should see "2001: A Space Odyssey" before "Aladdin"
-  And I should see "Chocolat" before "Raiders of the Lost Ark"
-
-Scenario: sort movies in increasing order of release date
-  When I follow "Release Date"
-  # your steps here
-  Then I should see "Te Terminator" before "Chicken Run"
-  And I should see "The Incredibles" before "The Help"
+Scenario: Add a movie
+  Given I am on the RottenPotatoes home page
+  When I follow "Add new movie"
+  Then I should be on the Create New Movie page
+  When I fill in "Title" with "Men In Black"
+  And I select "PG-13" from "Rating"
+  And I press "Save Changes"
+  Then I should be on the RottenPotatoes home page
+  And I should see "Men In Black"
